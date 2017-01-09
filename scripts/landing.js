@@ -1,23 +1,27 @@
-var revealPoint = function(idx) {
-    points[idx].style.opacity = 1;
-    points[idx].style.transform = "scaleX(1) translateY(0)";
-    points[idx].style.msTransform = "scaleX(1) translateY(0)";
-    points[idx].style.WebkitTransform = "scaleX(1) translateY(0)";
+var pointsArray = document.getElementsByClassName('point');
+
+var revealPoint = function(elm) {
+    elm.style.opacity = 1;
+    elm.style.transform = "scaleX(1) translateY(0)";
+    elm.style.msTransform = "scaleX(1) translateY(0)";
+    elm.style.WebkitTransform = "scaleX(1) translateY(0)";
 };
 
-var animatePoints = function() {
-    var points = document.getElementsByClassName('point');
+var animatePoints = function(points) {
     
-    var revealPoint = function(idx) {
-        points[idx].style.opacity = 1;
-        points[idx].style.transform = "scaleX(1) translateY(0)";
-        points[idx].style.msTransform = "scaleX(1) translateY(0)";
-        points[idx].style.WebkitTransform = "scaleX(1) translateY(0)";
-    };
+//    var revealPoint = function(idx) {
+//        points[idx].style.opacity = 1;
+//        points[idx].style.transform = "scaleX(1) translateY(0)";
+//        points[idx].style.msTransform = "scaleX(1) translateY(0)";
+//        points[idx].style.WebkitTransform = "scaleX(1) translateY(0)";
+//    };
     
-    for(var i=0; i< points.length; i++) {
-        revealPoint(i);
-    }
+    forEach(points, revealPoint2);
+    
+    
+//    for(var i=0; i< points.length; i++) {
+//        revealPoint(i);
+//    }
 //    var revealFirstPoint = function() {
 //        points[0].style.opacity = 1;
 //        points[0].style.transform = "scaleX(1) translateY(0)";
@@ -44,3 +48,18 @@ var animatePoints = function() {
 //    revealThirdPoint();
  
 };
+
+window.onload = function() {
+    //alert("The window has loaded!");
+    if (window.innerHeight > 950) {
+        animatePoints(pointsArray);
+    }
+    var sellingPoints = document.getElementsByClassName('selling-points')[0];
+    var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 200;
+    
+    window.addEventListener('scroll', function(event) {
+        if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
+            animatePoints(pointsArray);   
+        }
+    });
+}
