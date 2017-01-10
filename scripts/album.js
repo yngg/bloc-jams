@@ -68,7 +68,7 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
-//    var albumImage = document.getElementsByClassName('album-cover-art')[0];
+    var albumImage = document.getElementsByClassName('album-cover-art')[0];
     var clickTime = 0;
     albumImage.addEventListener('click', function() {
         if(clickTime%2 === 0) {
