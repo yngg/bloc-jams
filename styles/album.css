@@ -53,6 +53,7 @@ album-view-details .album-view-release-info {
 .song-item-number {
     width: 5%;
     text-align: left;
+    min-width: 30px;
 }
  
 .song-item-title {
@@ -68,6 +69,27 @@ album-view-details .album-view-release-info {
 song-item-play-times {
     width: 10%;
     text-align: left;
+}
+
+.album-song-button {
+    text-align: center;
+    font-size: 14px;
+    background-color: white;
+    color: rgb(210, 40, 123);
+    border-radius: 50% 50%;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+}
+
+.album-song-button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(210, 40, 123);
+}
+
+.album-song-button span {
+    line-height: 28px;
 }
 
  /* #2 */

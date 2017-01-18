@@ -30,10 +30,10 @@ var albumMarconi = {
     ]
 };
 
-var createSongRow = function(songNumber, songName, songLength, playTimes) {
+var createSongRow = function (songNumber, songName, songLength, playTimes) {
     var template =
         '<tr class="album-view-song-item">'
-      + '  <td class="song-item-number">' + songNumber + '</td>'
+      + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
       + '  <td class="song-item-duration">' + songLength + '</td>'
       + '  <td class="song-item-play-times">' + playTimes + '</td>'
@@ -61,10 +61,14 @@ var setCurrentAlbum = function(album) {
     albumSongList.innerHTML = '';
     
     // #4
-    for(var i=0; i < album.songs.length; i++) {
+    for(var i = 0; i < album.songs.length; i++) {
         albumSongList.innerHTML += createSongRow(i+1, album.songs[i].title, album.songs[i].duration, album.songs[i].repeat);
     }
 };
+
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+var songRows = document.getElementsByClassName('album-view-song-item');
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
@@ -78,4 +82,21 @@ window.onload = function() {
         }
         clickTime++;
     });
+    
+    songListContainer.addEventListener('mouseover', function(event) {
+        // #1
+        //console.log(event.target);
+        // Only target individual song rows during event delegation
+        if (event.target.parentElement.className === 'album-view-song-item') {
+            // Change the content from the number to the play button's HTML
+            event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+        }
+    });
+    
+    for (var i = 0; i < songRows.length; i++) {
+        songRows[i].addEventListener('mouseleave', function(event) {
+            // Revert the content back to the number
+            this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+        });
+    }
 }
