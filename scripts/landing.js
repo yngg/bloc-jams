@@ -16,7 +16,7 @@ var animatePoints = function(points) {
 //        points[idx].style.WebkitTransform = "scaleX(1) translateY(0)";
 //    };
     
-    forEach(points, revealPoint2);
+    forEach(points, revealPoint);
     
     
 //    for(var i=0; i< points.length; i++) {
